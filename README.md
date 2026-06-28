@@ -103,18 +103,18 @@ pip install -r requirements.txt
 python scripts/predict_single.py \
     --image examples/images/cju0roawvklrq0799vmjorwfv.jpg \
     --fixations examples/fixations/kvasir_samples.csv \
-    --output outputs/output_mask.png\
-    --preset  colonoscopy    
+    --output outputs/output_mask.png \
+    --preset colonoscopy
 ```
 
-Add `--save_overlay` to also get a colour overlay and a gaze-prior PNG:
+Add `--save_overlay` to also save a colour overlay (`output_mask_overlay.png`) and a gaze-prior PNG (`output_mask_gaze.png`) next to the mask:
 
 ```bash
 python scripts/predict_single.py \
     --image examples/images/cju0roawvklrq0799vmjorwfv.jpg \
     --fixations examples/fixations/kvasir_samples.csv \
-    --output outputs/output_mask.png\
-    --preset  colonoscopy\    
+    --output outputs/output_mask.png \
+    --preset colonoscopy \
     --save_overlay
 ```
 
@@ -125,7 +125,7 @@ python scripts/predict_single.py \
     --image examples/images/Prostate3T-01-0001_13.dcm \
     --fixations examples/fixations/nci-isbi_samples.csv \
     --output outputs/output_mask2.png \
-    --preset mri\
+    --preset mri \
     --save_overlay
 ```
 
@@ -136,23 +136,26 @@ from scripts.predict_single import predict
 
 # Returns a PIL Image of the binary mask
 mask = predict(
-    image_path="examples/images/kvasir_sample.jpg",
-    fixation_csv="examples/fixations/kvasir_sample.csv",
+    image_path="examples/images/cju0roawvklrq0799vmjorwfv.jpg",
+    fixation_csv="examples/fixations/kvasir_samples.csv",
 )
 mask.save("output_mask.png")
 
 # Extended: also get colour overlays and raw numpy arrays
 result = predict(
-    image_path="examples/images/kvasir_sample.jpg",
-    fixation_csv="examples/fixations/kvasir_sample.csv",
+    image_path="examples/images/cju0roawvklrq0799vmjorwfv.jpg",
+    fixation_csv="examples/fixations/kvasir_samples.csv",
     preset="colonoscopy",   # "colonoscopy" (default) | "mri"
     threshold=0.5,
     return_all=True,
 )
 result["mask"].save("mask.png")
-result["gaze_overlay"].save("gaze_prior.png")
+result["gaze_overlay"].save("gaze.png")
 result["mask_overlay"].save("overlay.png")
 ```
+
+`image_path` also accepts an already-loaded `PIL.Image` object — useful when
+calling `predict` from a Gradio Space or a notebook loop without hitting disk.
 
 ### Fixation CSV format
 
@@ -171,6 +174,18 @@ x,y,duration
 `x` and `y` are automatically normalized inside the model by the image size.
 Only *relative* durations matter — the model min-max normalizes them
 internally. See `examples/` for ready-to-run example CSVs.
+
+### CLI flags reference
+
+| Flag | Default | Description |
+|---|---|---|
+| `--image` | *(required)* | Path to the input image (`.jpg` / `.jpeg` / `.png` / `.dcm`) |
+| `--fixations` | *(required)* | Path to the fixation CSV (`x,y,duration` — pixel coordinates) |
+| `--output` | *(required)* | Where to save the predicted binary mask (`.png`) |
+| `--preset` | `colonoscopy` | Hyperparameter preset: `colonoscopy` or `mri` |
+| `--threshold` | `0.5` | Binarization threshold applied to the soft mask |
+| `--save_overlay` | off | Also save `<stem>_overlay.png` and `<stem>_gaze.png` next to `--output` |
+| `--device` | auto | `cuda` or `cpu` — auto-detected when not given |
 
 ### Reproducing paper results (full-dataset evaluation)
 
@@ -212,6 +227,10 @@ Please follow the original dataset licenses and usage agreements.
 Try GazeRefine directly in your browser — no local installation needed:
 
 [![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face-blue)](https://huggingface.co/spaces/BMO-Research/GazeRefine)
+
+<p align="center">
+  <img src="img/Screenshot_huggingface.jpeg" width="100%">
+</p>
 
 Or run the demo locally:
 
@@ -271,7 +290,6 @@ GazeRefine/
 │   │   ├── cju0roawvklrq0799vmjorwfv.jpg
 │   │   ├── Prostate3T-01-0001_13.dcm
 │   │   └── Prostate3T-01-0002_16.dcm
-│   │
 │   └── fixations/
 │       ├── kvasir_samples.csv    # ready-to-run example (colonoscopy, pixel coords)
 │       └── nci-isbi_samples.csv  # ready-to-run example (prostate MRI, pixel coords)
@@ -300,4 +318,4 @@ GazeRefine/
 ## License
 
 MIT — see [LICENSE](LICENSE).  
-DINOv3 weights are loaded from [DINOv3 repository](https://github.com/facebookresearch/dinov3) for terms before commercial use.
+DINOv3 weights are loaded from the [DINOv3 repository](https://github.com/facebookresearch/dinov3) — please review their terms before commercial use.
