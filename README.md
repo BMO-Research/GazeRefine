@@ -6,7 +6,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-ee4c2c)](https://pytorch.org/)
 [![timm](https://img.shields.io/badge/timm-1.0%2B-green)](https://github.com/huggingface/pytorch-image-models)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20Demo-Space-blue)](https://huggingface.co/spaces/oussamab2n/GazeRefine)
+[![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20Demo-Space-blue)](https://huggingface.co/spaces/BMO-Research/GazeRefine)
 [![Paper](https://img.shields.io/badge/Paper-MICAAI%202026-red)](https://arxiv.org/abs/XXXX.XXXXX)
 
 GazeRefine is a **training-free** and **zero-shot** medical image segmentation
@@ -211,7 +211,7 @@ Please follow the original dataset licenses and usage agreements.
 
 Try GazeRefine directly in your browser — no local installation needed:
 
-[![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face-blue)](https://huggingface.co/spaces/MohammedOussamaBEN/GazeRefine)
+[![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face-blue)](https://huggingface.co/spaces/BMO-Research/GazeRefine)
 
 Or run the demo locally:
 
