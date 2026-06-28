@@ -225,7 +225,7 @@ Deploy to your own Hugging Face Space:
 ```bash
 huggingface-cli login
 huggingface-cli repo create GazeRefine --type space --space_sdk gradio
-git clone https://huggingface.co/spaces/<your-username>/GazeRefine hf-space
+git clone https://huggingface.co/spaces/BMO-Research/GazeRefine hf-space
 cp huggingface_space/* hf-space/ -r
 cd hf-space && git add -A && git commit -m "GazeRefine demo" && git push
 ```
