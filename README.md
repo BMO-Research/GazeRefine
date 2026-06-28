@@ -307,7 +307,7 @@ GazeRefine/
 @inproceedings{gazerefine2026,
   title   = {GazeRefine: Expert Gaze as a Test-Time Prompt
              for Training-Free Medical Image Segmentation},
-  author  = {Mohammed Oussama Ben and co-authors},
+  author  = {..},
   year    = {2026},
   note    = {MICAAI 2026}
 }
